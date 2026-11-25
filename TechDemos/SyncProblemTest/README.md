@@ -28,6 +28,15 @@ This app uses a native Google sign-in module (`react-native-nitro-google-signin`
    npx expo start
    ```
 
+## Cloud module (`src/cloud/`)
+
+All cloud code lives in `src/cloud/`. Code outside it imports only from `src/cloud/index.ts`.
+
+- `<CloudProvider storage={createCloudStorage()}>` wraps the root layout. Create the storage once, at module scope.
+- `useCloud()` gives screens `status`, `account`, `connect`, `disconnect`, `uploadFile` and `listFiles`.
+- `CloudStorage` (`types.ts`) is the backend contract. `GoogleDriveStorage` is the only implementation so far.
+- To add a backend such as iCloud, implement `CloudStorage` in a new folder and select it in `createCloudStorage.ts`. Screens don't change.
+
 ## Checks
 
 ```bash
